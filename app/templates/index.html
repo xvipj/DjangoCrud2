@@ -1,0 +1,33 @@
+{% extends 'core.html' %}
+
+{% block title %}CRUD Basico con Django{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="nombre" placeholder="Ingrese su nombre">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                nombre
+            </tr>
+            <tr>
+                liminar
+                Actualizar
+            </tr>
+        </thead>
+        <tbody>
+            {% for all in all_name %}
+            <tr>
+                <td>{{ all.name }}</td>
+                <td>
+                    <a href="{% url 'delete' pk=all.id %}">Eliminar</a> <!-- enlace para eliminar -->
+                    <a href="{% url 'update' pk=all.id %}">Actualizar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
