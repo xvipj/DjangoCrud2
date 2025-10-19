@@ -6,3 +6,9 @@ class ExampleModel(models.Model):
 
     def __str__(self):
         return self.name
+    
+class NoticeModel(models.Model):
+    title = models.CharField(max_length=22)
+
+    def __str__(self):
+        return self.title
