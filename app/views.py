@@ -5,13 +5,15 @@ from .models import ExampleModel
 def index(request):
     if request.method == "POST":
         nombre = request.POST.get("nombre") # tomar el valor del input
+        photo = request.FILES.get("photo") # tomar el archivo subido
 
         if not nombre: # si el nombre esta vacio
             return redirect('index') # redirigir a la pagina principal
         
         # crear un objeto en la base de datos 
         object = ExampleModel.objects.create(
-            name=nombre
+            name=nombre,
+            photo=photo
         )
         object.save() # guardar el objeto en la base de datos
 

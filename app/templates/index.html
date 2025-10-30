@@ -3,9 +3,10 @@
 {% block title %}CRUD Basico con Django{% endblock %}
 
 {% block content %}
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="text" name="nombre" placeholder="Ingrese su nombre">
+        <input type="file" name="photo" id="photo" >
     </form>
 
     <table>
@@ -22,6 +23,15 @@
             {% for all in all_name %}
             <tr>
                 <td>{{ all.name }}</td>
+                <td>
+                    {% if all.photo %} <!-- si existe una imagen -->
+                        <img src="{{ all.photo.url }}" alt="Imagen de {{ all.name }}" width="100">
+                    {% else %}
+                        No hay imagen
+                    {% endif %}
+                </td>
+
+    
                 <td>
                     <a href="{% url 'delete' pk=all.id %}">Eliminar</a> <!-- enlace para eliminar -->
                     <a href="{% url 'update' pk=all.id %}">Actualizar</a>
